@@ -295,11 +295,7 @@ python -c "from config import config; config.print_config_summary()"
 
 ```python
 # إضافة ذكر جديد
-new_dhikr = {
-    'text': 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ',
-    'benefit': 'كلمتان خفيفتان على اللسان ثقيلتان في الميزان'
-}
-RANDOM_DHIKR.append(new_dhikr)
+قم بإضافة أذكار جديدة حيثما تشاء فى ملف Azkar.txt لكن مع الحفاظ على نفس الترتيب كي لا تواجه اي اخطاء 
 
 # تخصيص أوقات الأذكار
 config.MORNING_DHIKR_TIME = "06:00"
@@ -327,7 +323,7 @@ await register_group(chat_id=-1001234567890, chat_title="مجموعة الأذك
 
 ```bash
 # استنساخ مستودعك
-git clone https://github.com/yourusername/islamic-telegram-bot.git
+git clone https://github.com/Mavdii/Azkar-bot-Trial-Version.git
 
 # إنشاء branch جديد
 git checkout -b feature/new-feature
@@ -352,31 +348,13 @@ git push origin feature/new-feature
 ---
 
 ## 🏆 المساهمون
+Dev : Omar mahdy 
 
 <div align="center">
-
-شكر خاص لجميع المساهمين في هذا المشروع:
-
-[![Contributors](https://contrib.rocks/image?repo=yourusername/islamic-telegram-bot)](https://github.com/yourusername/islamic-telegram-bot/graphs/contributors)
 
 </div>
 
 ---
-
-## 📊 الإحصائيات
-
-<div align="center">
-
-![GitHub Stars](https://img.shields.io/github/stars/yourusername/islamic-telegram-bot?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/yourusername/islamic-telegram-bot?style=social)
-![GitHub Issues](https://img.shields.io/github/issues/yourusername/islamic-telegram-bot)
-![GitHub Pull Requests](https://img.shields.io/github/issues-pr/yourusername/islamic-telegram-bot)
-
-![GitHub Commit Activity](https://img.shields.io/github/commit-activity/m/yourusername/islamic-telegram-bot)
-![GitHub Last Commit](https://img.shields.io/github/last-commit/yourusername/islamic-telegram-bot)
-![GitHub Code Size](https://img.shields.io/github/languages/code-size/yourusername/islamic-telegram-bot)
-
-</div>
 
 ---
 
@@ -394,10 +372,10 @@ git push origin feature/new-feature
 
 ### 💬 طرق التواصل
 
-- **Telegram**: [@IslamicBotSupport](https://t.me/IslamicBotSupport)
-- **Email**: support@islamicbot.com
-- **GitHub Issues**: [إبلاغ عن مشكلة](https://github.com/yourusername/islamic-telegram-bot/issues)
-- **Discord**: [انضم لخادمنا](https://discord.gg/islamicbot)
+- **Telegram**:t.me/Mavdiii
+- **Email**: omarelmhdi@gmail.com
+- **GitHub Issues**: [إبلاغ عن مشكلة](https://github.com/Mavdii/Azkar-bot-Trial-Version/issues)
+
 
 ### ❓ الحصول على المساعدة
 
@@ -466,7 +444,7 @@ SOFTWARE.
 
 ---
 
-Made with ❤️ for the Muslim Ummah
+Made with ❤️ by omar mahdy for the Muslim Ummah
 
 ![Islamic Bot](https://img.shields.io/badge/🕌-Made%20with%20Love%20for%20Islam-green?style=for-the-badge)
 
