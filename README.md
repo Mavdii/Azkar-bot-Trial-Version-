@@ -372,7 +372,7 @@ Dev : Omar mahdy
 
 ### 💬 طرق التواصل
 
-- **Telegram**:t.me/Mavdiii
+- **Telegram**: t.me/Mavdiii
 - **Email**: omarelmhdi@gmail.com
 - **GitHub Issues**: [إبلاغ عن مشكلة](https://github.com/Mavdii/Azkar-bot-Trial-Version/issues)
 
