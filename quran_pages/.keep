@@ -1,0 +1,10 @@
+# This file ensures that the quran_pages directory is tracked by Git
+# even when it's empty or contains only images that might be ignored.
+# 
+# 📖 Quran Pages Directory
+# This directory contains images of Quran pages (1-604)
+# Used by the Islamic Bot for daily Quran reading feature
+#
+# File naming convention: 001.jpg, 002.jpg, ..., 604.jpg
+# 
+# Note: Keep this file to maintain directory structure in version control

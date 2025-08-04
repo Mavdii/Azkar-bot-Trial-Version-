@@ -1,0 +1,10 @@
+# This file ensures that the post_prayer_images directory is tracked by Git
+# even when it's empty or contains only images that might be ignored.
+# 
+# 🕌 Post-Prayer Images Directory
+# This directory contains images for post-prayer dhikr reminders
+# Used by the Islamic Bot to send visual dhikr after prayer times
+#
+# Supported formats: .jpg, .jpeg, .png, .webp
+# 
+# Note: Keep this file to maintain directory structure in version control

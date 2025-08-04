@@ -1,0 +1,18 @@
+# البوت الإسلامي الشامل - المتطلبات الأساسية
+
+pytz==2024.2
+aiocron
+python-dotenv==1.0.1
+requests==2.32.3
+schedule
+
+# مكتبات إضافية للاستقرار
+aiohttp==3.10.10
+python-dateutil==2.9.0.post0
+typing-extensions==4.12.2
+
+# مكتبات التطوير (اختيارية)
+# pytest==8.3.3
+# pytest-asyncio==0.24.0
+# black==24.8.0
+# aiofiles==24.1.0

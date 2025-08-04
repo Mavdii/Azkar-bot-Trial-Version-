@@ -1,0 +1,746 @@
+# ==========================================
+# 🕌 Islamic Bot - Git Ignore File
+# ==========================================
+# Professional .gitignore for Python Telegram Bot
+# Prevents sensitive data and unnecessary files from being committed
+
+# ==========================================
+# 🔒 Environment & Secrets
+# ==========================================
+.env
+.env.local
+.env.production
+.env.staging
+.env.development
+*.env
+config.ini
+secrets.json
+credentials.json
+private_keys/
+certificates/
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# ==========================================
+# 🐍 Python Specific
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ==========================================
+# 🧪 Testing & Coverage
+# ==========================================
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+htmlcov/
+.testmondata
+
+# ==========================================
+# 📝 Logging & Temporary Files
+# ==========================================
+*.log
+*.log.*
+logs/
+temp/
+tmp/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==========================================
+# 🗄️ Database Files
+# ==========================================
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+database.sql
+backup.sql
+*.dump
+*.sql.gz
+
+# ==========================================
+# 📱 Bot Specific Files
+# ==========================================
+bot_data/
+user_data/
+chat_data/
+callback_data/
+persistence_data/
+session_data/
+islamic_bot.log*
+bot_errors.log
+activity.log
+statistics.json
+cache/
+downloads/
+uploads/
+media/
+images/
+audio/
+documents/
+
+# ==========================================
+# 🔧 IDE & Editor Files
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+.metadata
+.recommenders/
+.c9revisions/
+.sublime-project
+.sublime-workspace
+*.sublime-*
+.atom/
+.brackets.json
+
+# ==========================================
+# 🌐 Virtual Environments
+# ==========================================
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+.ENV/
+.env/
+pyvenv.cfg
+pip-selfcheck.json
+
+# ==========================================
+# 📦 Package Managers
+# ==========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# ==========================================
+# 🐳 Docker & Containers
+# ==========================================
+Dockerfile.local
+docker-compose.override.yml
+.dockerignore.local
+*.dockerfile
+.docker/
+
+# ==========================================
+# ☁️ Cloud & Deployment
+# ==========================================
+.serverless/
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+.vagrant/
+.aws/
+.gcp/
+.azure/
+deployment/
+k8s/secrets/
+helm/values-*.yaml
+
+# ==========================================
+# 📊 Analytics & Monitoring
+# ==========================================
+.prometheus/
+.grafana/
+metrics/
+monitoring/
+alerts/
+dashboards/
+
+# ==========================================
+# 🔄 CI/CD & Automation
+# ==========================================
+.github/workflows/secrets/
+.gitlab-ci-local/
+.jenkins/
+.circleci/config-local.yml
+.travis.yml.local
+.appveyor.yml.local
+
+# ==========================================
+# 📱 Mobile Development
+# ==========================================
+.gradle/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/
+.packages
+pubspec.lock
+ios/
+android/
+.expo/
+.expo-shared/
+
+# ==========================================
+# 🎨 Frontend Assets
+# ==========================================
+static/
+assets/
+public/build/
+dist/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless_nextjs/
+
+# ==========================================
+# 📚 Documentation
+# ==========================================
+docs/_build/
+site/
+.mkdocs/
+.sphinx/
+.readthedocs.yml.local
+
+# ==========================================
+# 🔍 Search & Indexing
+# ==========================================
+.whoosh_index/
+.elasticsearch/
+.solr/
+search_index/
+
+# ==========================================
+# 📈 Data & Analytics
+# ==========================================
+data/
+datasets/
+models/
+checkpoints/
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.npz
+*.npy
+
+# ==========================================
+# 🎵 Media Files
+# ==========================================
+*.mp3
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.ogg
+*.wav
+*.flac
+*.aac
+*.m4a
+*.wma
+
+# ==========================================
+# 🖼️ Image Files (Large)
+# ==========================================
+*.psd
+*.ai
+*.eps
+*.tiff
+*.tif
+*.raw
+*.cr2
+*.nef
+*.orf
+*.sr2
+
+# ==========================================
+# 📄 Document Files
+# ==========================================
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.odt
+*.ods
+*.odp
+
+# ==========================================
+# 🗜️ Archive Files
+# ==========================================
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.bz2
+*.xz
+
+# ==========================================
+# 🔧 System Files
+# ==========================================
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+*.lnk
+*.url
+*.webloc
+desktop.ini
+$RECYCLE.BIN/
+.com.apple.timemachine.donotpresent
+
+# ==========================================
+# 🌐 Web Browser Files
+# ==========================================
+.chrome/
+.firefox/
+.safari/
+.edge/
+cookies.txt
+bookmarks.html
+history.db
+
+# ==========================================
+# 📱 Mobile App Files
+# ==========================================
+*.apk
+*.ipa
+*.aab
+*.app
+*.dSYM/
+*.xcarchive/
+*.xcworkspace/
+*.xcodeproj/
+
+# ==========================================
+# 🔒 Security & Certificates
+# ==========================================
+*.p7b
+*.p7c
+*.p7m
+*.p7s
+*.der
+*.cer
+*.csr
+*.jks
+*.keystore
+*.truststore
+private/
+secure/
+confidential/
+
+# ==========================================
+# 📊 Business Intelligence
+# ==========================================
+*.pbix
+*.twbx
+*.hyper
+*.extract
+*.tde
+*.tdsx
+*.twb
+
+# ==========================================
+# 🎮 Game Development
+# ==========================================
+*.unity
+*.unitypackage
+*.asset
+*.prefab
+*.scene
+*.meta
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+
+# ==========================================
+# 🔬 Scientific Computing
+# ==========================================
+*.mat
+*.fig
+*.slx
+*.mdl
+*.simulink
+*.ipynb_checkpoints/
+.ipynb_checkpoints/
+
+# ==========================================
+# 🏗️ Build Tools
+# ==========================================
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+.maven/
+target/
+.m2/
+.sbt/
+project/target/
+project/project/
+
+# ==========================================
+# 🌍 Localization
+# ==========================================
+*.mo
+*.pot
+locale/
+translations/
+i18n/
+l10n/
+
+# ==========================================
+# 🔄 Version Control
+# ==========================================
+.git/
+.svn/
+.hg/
+.bzr/
+_darcs/
+.fossil-settings/
+
+# ==========================================
+# 📱 Cross-Platform
+# ==========================================
+.cordova/
+platforms/
+plugins/
+www/
+.ionic/
+.capacitor/
+
+# ==========================================
+# 🎯 Machine Learning
+# ==========================================
+*.model
+*.weights
+*.ckpt
+*.pb
+*.onnx
+*.tflite
+*.mlmodel
+*.coreml
+wandb/
+mlruns/
+.mlflow/
+
+# ==========================================
+# 🔧 Development Tools
+# ==========================================
+.pre-commit-config.yaml.local
+.editorconfig.local
+.eslintrc.local
+.prettierrc.local
+.stylelintrc.local
+
+# ==========================================
+# 📊 Monitoring & Observability
+# ==========================================
+.jaeger/
+.zipkin/
+.opentelemetry/
+traces/
+spans/
+metrics.json
+
+# ==========================================
+# 🌐 CDN & Assets
+# ==========================================
+.cdn/
+.assets/
+.static/
+.public/
+.www/
+
+# ==========================================
+# 🔒 Backup Files
+# ==========================================
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*~
+.backup/
+backups/
+snapshots/
+
+# ==========================================
+# 📱 Progressive Web Apps
+# ==========================================
+.pwa/
+sw.js
+manifest.json
+.workbox/
+
+# ==========================================
+# 🎨 Design Files
+# ==========================================
+*.sketch
+*.fig
+*.xd
+*.indd
+*.ai
+*.psd
+design/
+mockups/
+wireframes/
+
+# ==========================================
+# 🔧 Configuration Overrides
+# ==========================================
+config.local.py
+settings.local.py
+local_settings.py
+development.py
+production.py
+staging.py
+
+# ==========================================
+# 📊 Performance Profiling
+# ==========================================
+*.prof
+*.profile
+.profiling/
+benchmarks/
+performance/
+
+# ==========================================
+# 🌍 Geospatial Data
+# ==========================================
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.qix
+*.sbn
+*.sbx
+*.fbn
+*.fbx
+*.ain
+*.aih
+*.ixs
+*.mxs
+*.atx
+*.xml
+
+# ==========================================
+# 📱 Mobile Testing
+# ==========================================
+.appium/
+.selenium/
+screenshots/
+test-results/
+allure-results/
+reports/
+
+# ==========================================
+# 🔄 Workflow Engines
+# ==========================================
+.airflow/
+.prefect/
+.dagster/
+.luigi/
+workflows/
+pipelines/
+
+# ==========================================
+# 📊 Data Processing
+# ==========================================
+.spark/
+.hadoop/
+.kafka/
+.flink/
+.storm/
+streaming/
+
+# ==========================================
+# 🔒 Enterprise Security
+# ==========================================
+.vault/
+.consul/
+.etcd/
+.zookeeper/
+secrets/
+policies/
+
+# ==========================================
+# 📱 IoT & Edge
+# ==========================================
+.iot/
+.edge/
+devices/
+sensors/
+gateways/
+
+# ==========================================
+# 🌐 Microservices
+# ==========================================
+.istio/
+.linkerd/
+.consul-connect/
+service-mesh/
+sidecars/
+
+# ==========================================
+# 📊 Time Series
+# ==========================================
+.influxdb/
+.prometheus/
+.grafana/
+.telegraf/
+timeseries/
+
+# ==========================================
+# 🔧 Infrastructure
+# ==========================================
+.ansible/
+.puppet/
+.chef/
+.saltstack/
+infrastructure/
+provisioning/
+
+# ==========================================
+# 📱 Blockchain
+# ==========================================
+.blockchain/
+.ethereum/
+.bitcoin/
+.web3/
+contracts/
+dapps/
+
+# ==========================================
+# 🎵 Audio Processing
+# ==========================================
+.audio/
+.sound/
+.music/
+audio-cache/
+sound-effects/
+
+# ==========================================
+# 📊 Business Analytics
+# ==========================================
+.tableau/
+.powerbi/
+.qlik/
+.looker/
+analytics/
+dashboards/
+
+# ==========================================
+# 🔒 Compliance & Audit
+# ==========================================
+.compliance/
+.audit/
+.gdpr/
+.hipaa/
+.sox/
+compliance-reports/
+
+# ==========================================
+# 📱 Augmented Reality
+# ==========================================
+.ar/
+.vr/
+.xr/
+.unity3d/
+.unreal/
+ar-assets/
+
+# ==========================================
+# 🌍 Climate & Sustainability
+# ==========================================
+.carbon/
+.sustainability/
+.green/
+carbon-footprint/
+energy-usage/
+
+# ==========================================
+# 📊 Advanced Analytics
+# ==========================================
+.jupyter/
+.zeppelin/
+.databricks/
+.sagemaker/
+notebooks/
+experiments/
+
+# ==========================================
+# 🔧 Custom Project Files
+# ==========================================
+# Add your custom ignore patterns here
+custom/
+local/
+personal/
+scratch/
+playground/
+
+# ==========================================
+# End of .gitignore
+# ==========================================

@@ -1,0 +1,285 @@
+# ==========================================
+# 🕌 Islamic Bot - Docker Compose Configuration
+# ==========================================
+# Complete development and production setup
+# Includes bot, database, monitoring, and backup services
+
+version: '3.8'
+
+services:
+  # ==========================================
+  # 🤖 Islamic Bot Service
+  # ==========================================
+  islamic-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: islamic-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./logs:/app/logs
+      - ./backups:/app/backups
+      - ./post_prayer_images:/app/post_prayer_images:ro
+    networks:
+      - islamic-bot-network
+    depends_on:
+      - postgres
+      - redis
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('https://api.telegram.org/bot${BOT_TOKEN}/getMe')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.islamicbot.service=main"
+      - "com.islamicbot.version=3.0.0"
+
+  # ==========================================
+  # 🗄️ PostgreSQL Database (Optional - if not using Supabase)
+  # ==========================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: islamic-bot-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: islamic_bot
+      POSTGRES_USER: islamicbot
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secure_password_here}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./islamic_bot_database.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - islamic-bot-network
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U islamicbot -d islamic_bot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    labels:
+      - "com.islamicbot.service=database"
+
+  # ==========================================
+  # 🔄 Redis Cache Service
+  # ==========================================
+  redis:
+    image: redis:7-alpine
+    container_name: islamic-bot-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis_password_here}
+    volumes:
+      - redis_data:/data
+    networks:
+      - islamic-bot-network
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    labels:
+      - "com.islamicbot.service=cache"
+
+  # ==========================================
+  # 📊 Monitoring - Prometheus
+  # ==========================================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: islamic-bot-prometheus
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - islamic-bot-network
+    ports:
+      - "9090:9090"
+    labels:
+      - "com.islamicbot.service=monitoring"
+
+  # ==========================================
+  # 📈 Visualization - Grafana
+  # ==========================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: islamic-bot-grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin_password_here}
+      GF_USERS_ALLOW_SIGN_UP: false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    networks:
+      - islamic-bot-network
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    labels:
+      - "com.islamicbot.service=visualization"
+
+  # ==========================================
+  # 🔄 Backup Service
+  # ==========================================
+  backup:
+    image: postgres:15-alpine
+    container_name: islamic-bot-backup
+    restart: "no"
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:-secure_password_here}
+    volumes:
+      - ./backups:/backups
+      - ./scripts/backup.sh:/backup.sh:ro
+    networks:
+      - islamic-bot-network
+    depends_on:
+      - postgres
+    command: /bin/sh -c "chmod +x /backup.sh && /backup.sh"
+    labels:
+      - "com.islamicbot.service=backup"
+
+  # ==========================================
+  # 🌐 Reverse Proxy - Nginx (Optional)
+  # ==========================================
+  nginx:
+    image: nginx:alpine
+    container_name: islamic-bot-nginx
+    restart: unless-stopped
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    networks:
+      - islamic-bot-network
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - islamic-bot
+      - grafana
+    labels:
+      - "com.islamicbot.service=proxy"
+
+  # ==========================================
+  # 📝 Log Management - Loki
+  # ==========================================
+  loki:
+    image: grafana/loki:latest
+    container_name: islamic-bot-loki
+    restart: unless-stopped
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./monitoring/loki/loki-config.yml:/etc/loki/local-config.yaml:ro
+      - loki_data:/loki
+    networks:
+      - islamic-bot-network
+    ports:
+      - "3100:3100"
+    labels:
+      - "com.islamicbot.service=logging"
+
+  # ==========================================
+  # 📊 Log Collection - Promtail
+  # ==========================================
+  promtail:
+    image: grafana/promtail:latest
+    container_name: islamic-bot-promtail
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/promtail/promtail-config.yml:/etc/promtail/config.yml:ro
+      - ./logs:/var/log/islamicbot:ro
+      - /var/log:/var/log:ro
+    networks:
+      - islamic-bot-network
+    depends_on:
+      - loki
+    labels:
+      - "com.islamicbot.service=log-collection"
+
+# ==========================================
+# 🌐 Networks
+# ==========================================
+networks:
+  islamic-bot-network:
+    driver: bridge
+    name: islamic-bot-network
+    labels:
+      - "com.islamicbot.network=main"
+
+# ==========================================
+# 💾 Volumes
+# ==========================================
+volumes:
+  postgres_data:
+    driver: local
+    name: islamic-bot-postgres-data
+    labels:
+      - "com.islamicbot.volume=database"
+  
+  redis_data:
+    driver: local
+    name: islamic-bot-redis-data
+    labels:
+      - "com.islamicbot.volume=cache"
+  
+  prometheus_data:
+    driver: local
+    name: islamic-bot-prometheus-data
+    labels:
+      - "com.islamicbot.volume=monitoring"
+  
+  grafana_data:
+    driver: local
+    name: islamic-bot-grafana-data
+    labels:
+      - "com.islamicbot.volume=visualization"
+  
+  loki_data:
+    driver: local
+    name: islamic-bot-loki-data
+    labels:
+      - "com.islamicbot.volume=logging"
+
+# ==========================================
+# 🚀 Usage Instructions:
+# ==========================================
+# Development:
+#   docker-compose up -d islamic-bot postgres redis
+#
+# Production with monitoring:
+#   docker-compose up -d
+#
+# Backup:
+#   docker-compose run --rm backup
+#
+# View logs:
+#   docker-compose logs -f islamic-bot
+#
+# Scale bot (if needed):
+#   docker-compose up -d --scale islamic-bot=2
+#
+# Stop all services:
+#   docker-compose down
+#
+# Remove all data:
+#   docker-compose down -v
+# ==========================================
